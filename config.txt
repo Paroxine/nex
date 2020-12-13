@@ -1,0 +1,8 @@
+root=E:\CopieFichesEtReste\Fiche
+out=A_Supprimer
+in=A_Conserver
+middle=A_Verifier
+fpaths=Liste_Fichiers.txt
+fnames_in=Liste_A_Conserver.txt
+fnames_out=Liste_A_Supprimer.txt
+pattern=([0-9]{6}.*?RACCO)|Thumbs
