@@ -42,9 +42,8 @@ for i in range(n):
 
 f = open(config["fpaths"], "w")
 for fl in files:
-    f.write(fl + "\n")
-f.close()
-
-f = open("log.txt", "w")
-f.write("\n".join(log))
+    try:
+        f.write(fl + "\n")
+    except:
+        print("ERR : " + fl)
 f.close()
