@@ -11,24 +11,43 @@ f.close()
 fnames_in = []
 fnames_out = []
 remaining = os.listdir(config["middle"])
-for fpath in fpaths:
+log = []
+for i in range(len(fpaths)):
     print(fpath)
+    fname = fpaths[i]
     fname = fpath.split("/")[-1]
     if fname in remaining:
         fnames_in.append(fname)
         path = get_filepath(config["in"],fname)
-        make_filepath(path)
-        copyfile(config["middle"] + "/" + fname, path)
+        try:
+            make_filepath(path)
+            copyfile(config["middle"] + "/" + fname, path)
+        except:
+            log.append(fname)
     else:
         fnames_out.append(fname)
         path = get_filepath(config["out"],fname)
-        make_filepath(path)
-        copyfile(config["root"] + "/" + fpath,path)
+        try:
+            make_filepath(path)
+            copyfile(config["root"] + "/" + fpath,path)
+        except:
+            log.append(fname)
+ 
+for entry in log:
+    print("ERR : " + entry)
 
 f = open(config["fnames_in"],"w")
-f.write("\n".join(fnames_in))
-f.close()
+try:
+    f.write("\n".join(fnames_in))
+except:
+    print("Failed to write fnames_in")
+finally:
+    f.close()
 
 f = open(config["fnames_out"],"w")
-f.write("\n".join(fnames_out))
-f.close()
+try:
+    f.write("\n".join(fnames_out))
+except:
+    print("Failed to write fnames_out")
+finally:
+    f.close()
